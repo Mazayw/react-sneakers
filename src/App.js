@@ -16,14 +16,19 @@ function App() {
       .then((data) => setItems(data));
   }, []);
 
-  const onAddToCart = (obj) => {
-    setCartItems((prev) => [...prev, obj]);
+  const onAddToCart = (obj, isPlusActive) => {
+    if (isPlusActive) {
+      setCartItems((prev) => [...prev.filter((el) => el.title !== obj.title)]);
+    } else {
+      setCartItems((prev) => [...prev, obj]);
+    }
   };
 
   return (
     <div className="wrapper clear">
       {cartOpened && (
         <Drawer
+          onClickRemove={setCartItems}
           items={cartItems}
           onClickCart={() => setCartOpened(!cartOpened)}
         />
@@ -44,7 +49,7 @@ function App() {
               price={item.price}
               imageUrl={item.imageUrl}
               onFavorite={() => console.log('add in Favorites')}
-              onPlus={(obj) => onAddToCart(obj)}
+              onPlus={(obj, isPlusActive) => onAddToCart(obj, isPlusActive)}
             />
           ))}
         </div>

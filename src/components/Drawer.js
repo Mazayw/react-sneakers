@@ -1,4 +1,11 @@
-function Drawer({ onClickCart, items = [] }) {
+function Drawer({ onClickRemove, onClickCart, items = [] }) {
+  const onRemoveFromCart = (title) => {
+    const index = items.findIndex((el) => el.title === title);
+    items.splice(index, 1);
+    onClickRemove((prev) => [...items]);
+    console.log(title);
+  };
+
   return (
     <div className="overlay">
       <div className="drawer d-flex flex-column">
@@ -26,6 +33,7 @@ function Drawer({ onClickCart, items = [] }) {
                 className="removeBtn"
                 src="/img/btn-remove.svg"
                 alt="Remove"
+                onClick={() => onRemoveFromCart(obj.title)}
               />
             </div>
           ))}
