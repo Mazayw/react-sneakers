@@ -2,6 +2,7 @@ import React from 'react';
 import Card from './components/Card';
 import Header from './components/Header';
 import Drawer from './components/Drawer';
+import axios from 'axios';
 
 function App() {
   const [items, setItems] = React.useState([]);
@@ -10,19 +11,20 @@ function App() {
   const [cartOpened, setCartOpened] = React.useState(false);
 
   React.useEffect(() => {
-    fetch('https://628c04563df57e983ec85bcd.mockapi.io/items')
+    axios
+      .get('https://628c04563df57e983ec85bcd.mockapi.io/items')
       .then((res) => {
-        return res.json();
-      })
-      .then((data) => setItems(data));
+        setItems(res.data);
+      });
   }, []);
 
   const onAddToCart = (obj, isPlusActive) => {
-    if (isPlusActive) {
-      setCartItems((prev) => [...prev.filter((el) => el.title !== obj.title)]);
-    } else {
-      setCartItems((prev) => [...prev, obj]);
+    if (!isPlusActive) {
+      axios.post('https://628c04563df57e983ec85bcd.mockapi.io/cart', obj);
     }
+    /*else {
+      setCartItems((prev) => [...prev, obj]);
+    }*/
   };
 
   const onChangeSearchInput = (event) => {
@@ -46,9 +48,9 @@ function App() {
             <img src="/img/search.svg" alt="Search" />
             {searchValue && (
               <img
-                className="removeBtn"
+                className="clearBtn"
                 src="/img/btn-remove.svg"
-                alt="Remove"
+                alt="Clear search"
                 onClick={() => setSearchValue('')}
               />
             )}
