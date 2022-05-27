@@ -6,7 +6,7 @@ import axios from 'axios';
 
 function App() {
   const [items, setItems] = React.useState([]);
-  const [cartItems, setCartItems] = React.useState([]);
+  //const [cartItems, setCartItems] = React.useState([]);
   const [searchValue, setSearchValue] = React.useState('');
   const [cartOpened, setCartOpened] = React.useState(false);
 
@@ -35,8 +35,8 @@ function App() {
     <div className="wrapper clear">
       {cartOpened && (
         <Drawer
-          onClickRemove={setCartItems}
-          items={cartItems}
+          //onClickRemove={setCartItems}
+          //items={cartItems}
           onClickCart={() => setCartOpened(!cartOpened)}
         />
       )}
