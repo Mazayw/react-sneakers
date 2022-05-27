@@ -1,26 +1,4 @@
-import React from 'react';
-import axios from 'axios';
-
-function Drawer({ onClickRemove, onClickCart, items = [] }) {
-  const [cartItems, setCartItems] = React.useState([]);
-
-  const onRemoveFromCart = (id) => {
-    const index = cartItems.findIndex((el) => el.id === id);
-    cartItems.splice(index, 1);
-    setCartItems((prev) => [...cartItems]);
-    axios.delete(`https://628c04563df57e983ec85bcd.mockapi.io/cart/${id}`);
-    //axios.post('https://628c04563df57e983ec85bcd.mockapi.io/cart', cartItems);
-    console.log(id);
-  };
-
-  React.useEffect(() => {
-    axios
-      .get('https://628c04563df57e983ec85bcd.mockapi.io/cart')
-      .then((res) => {
-        setCartItems(res.data);
-      });
-  }, []);
-
+function Drawer({ onRemoveFromCart, onClickCart, cartItems = [] }) {
   return (
     <div className="overlay">
       <div className="drawer d-flex flex-column">
@@ -48,7 +26,7 @@ function Drawer({ onClickRemove, onClickCart, items = [] }) {
                 className="removeBtn"
                 src="/img/btn-remove.svg"
                 alt="Remove"
-                onClick={() => onRemoveFromCart(obj.id)}
+                onClick={() => onRemoveFromCart(obj)}
               />
             </div>
           ))}
