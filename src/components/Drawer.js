@@ -12,10 +12,10 @@ function Drawer({ onRemoveFromCart, onClickCart, cartItems = [] }) {
           />
         </h2>
         {cartItems.length > 0 ? (
-          <div className="h100p">
+          <div className="h100p d-flex flex-column">
             <div className="items flex">
-              {cartItems.map((obj) => (
-                <div className="cartItem d-flex align-center mb-20">
+              {cartItems.map((obj, index) => (
+                <div className="cartItem d-flex align-center mb-20" key={index}>
                   <div
                     style={{ backgroundImage: `url(${obj.imageUrl})` }}
                     className="cartItemImg d-flex"
