@@ -24,6 +24,7 @@ function Header(props) {
               height={18}
               src="/img/favorite.svg"
               alt="Favorite"
+              onClick={props.onClickFavorite}
             />
           </Link>
         </li>

@@ -1,9 +1,17 @@
 import React from 'react';
 import styles from './Card.module.scss';
 
-function Card({ onFavorite, imageUrl, name, title, price, onPlus }) {
+function Card({
+  onFavorite,
+  imageUrl,
+  title,
+  price,
+  onPlus,
+  id,
+  favorited = false,
+}) {
   const [isPlusActive, setActivePlus] = React.useState(false);
-  const [isFavoriteActive, setActiveFavorite] = React.useState(false);
+  const [isFavoriteActive, setActiveFavorite] = React.useState(favorited);
 
   const onClickPlus = () => {
     onPlus({ title, imageUrl, price }, isPlusActive);
@@ -11,7 +19,7 @@ function Card({ onFavorite, imageUrl, name, title, price, onPlus }) {
   };
 
   const onClickFavorite = () => {
-    onFavorite();
+    onFavorite({ id, title, imageUrl, price }, isFavoriteActive);
     setActiveFavorite(!isFavoriteActive);
   };
 
@@ -24,7 +32,7 @@ function Card({ onFavorite, imageUrl, name, title, price, onPlus }) {
           alt="Like button like"
         />
       </div>
-      <img width={133} height={112} src={imageUrl} alt={name} />
+      <img width={133} height={112} src={imageUrl} alt={title} />
       <h5>{title}</h5>
       <div className="d-flex justify-between align-center">
         <div className="d-flex flex-column ">

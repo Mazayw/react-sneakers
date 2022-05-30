@@ -6,8 +6,8 @@ function Home({
   onAddToCart,
   onChangeSearchInput,
   setSearchValue,
+  onChangeFavorite,
 }) {
-  console.log(items);
   return (
     <div className="content p-40">
       <div className="d-flex align-center mb-40 justify-between">
@@ -40,7 +40,9 @@ function Home({
               title={item.title}
               price={item.price}
               imageUrl={item.imageUrl}
-              onFavorite={() => console.log('add in Favorites')}
+              onFavorite={(obj, isFavoriteActive) =>
+                onChangeFavorite(obj, isFavoriteActive)
+              }
               onPlus={(obj, isPlusActive) => onAddToCart(obj, isPlusActive)}
             />
           ))}
