@@ -19,6 +19,7 @@ function App() {
       .then((res) => {
         setItems(res.data);
       });
+    onOpenFavorite();
   }, []);
 
   const onOpenCart = () => {
